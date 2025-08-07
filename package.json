@@ -12,8 +12,8 @@
     "start:ff": "export BROWSER='firefox' && node utils/server.js",
     "build": "export BROWSER='chrome' && node utils/build.js",
     "build:ff": "export BROWSER='firefox' && node utils/build.js",
-    "css:extension": "css -i ./src/app/index.css -o src/app/output.css --watch",
-
+    "css": "tailwindcss -i ./src/app/index.css -o src/app/output.css --watch",
+    "css:build": "tailwindcss -i ./src/app/index.css -o src/app/output.css",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
   },
   "dependencies": {
@@ -111,7 +111,7 @@
     "sass-loader": "^13.2.0",
     "source-map-loader": "^3.0.1",
     "style-loader": "^3.3.1",
-    "tailwindcss": "^3.4.10",
+    "tailwindcss": "^3.4.17",
     "terser-webpack-plugin": "^5.3.6",
     "ts-loader": "^9.4.2",
     "type-fest": "^3.5.2",

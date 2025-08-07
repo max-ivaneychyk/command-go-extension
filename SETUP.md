@@ -24,19 +24,11 @@ npm --version
 npm install
 ```
 
-### 2. Set up Tailwind CSS
+### 2. Init CSS
 
-This project uses Tailwind CSS. You need to set up the Tailwind CLI:
-
+Build and watch css
 ```bash
-# Download Tailwind CLI for macOS
-curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-macos-x64
-
-# Make it executable
-chmod +x tailwindcss-macos-x64
-
-# Rename for easier use
-mv tailwindcss-macos-x64 tailwindcss
+npm run css
 ```
 
 ### 3. Start Development Server
@@ -55,10 +47,7 @@ This will:
 If you're working on styling, you'll need to watch and compile the CSS files. Open new terminal windows/tabs and run:
 
 ```bash
-# For main extension styles
-./tailwindcss -i ./src/app/index.css -o src/app/output.css --watch
-
-
+npm run css:build
 ```
 
 ### 5. Load Extension in Chrome
@@ -90,7 +79,7 @@ npm run build          # Build for Chrome
 npm run build:ff       # Build for Firefox
 
 # CSS Compilation
-npm run css:extension  # Watch extension CSS
+npm run css  # Watch extension CSS
 
 # Code Formatting
 npm run prettier      # Format all code files
