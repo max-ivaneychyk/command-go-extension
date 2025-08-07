@@ -1,0 +1,43 @@
+import {useSaveResultTo} from "../../hooks/useSaveResultTo";
+import React from 'react';
+import {getInitialScheme, useSelectFrom} from "../../hooks/useSelectFrom";
+import IconCommand, {ICON_COLOR} from "../../components/IconCommand";
+import ExecuteIn from "../../components/ExecuteIn";
+import run from "./GetKeysFromDB.run";
+import {TEXT} from "../../const/messages";
+import {RiDatabase2Fill} from "react-icons/ri";
+import {COMMANDS} from "../../const/commands";
+
+const scheme = {
+  type: COMMANDS.GET_KEYS_FROM_DB,
+  main: false,
+  dbName: getInitialScheme(),
+  saveTo: ""
+}
+
+const Control = ({name}) => {
+  const {jsx} = useSelectFrom({
+    group: `${name}dbName`,
+  })
+
+  const {jsx: saveToJsx} = useSaveResultTo({name: `${name}saveTo`, text:""})
+
+  return (
+    <>
+      Get keys from IndexedDB {jsx}
+      {TEXT.ASSIGN_TO}{saveToJsx} <ExecuteIn name={name} />
+    </>
+  )
+}
+
+
+export const GetKeysFromDBCommand = {
+  icon:   <IconCommand Svg={RiDatabase2Fill} className={ICON_COLOR.BLUE} />,
+  label: "Get Keys From IndexDB",
+  Control,
+  run,
+  scheme,
+}
+
+
+

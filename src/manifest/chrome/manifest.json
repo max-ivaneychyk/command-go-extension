@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "CommandGo",
+  "description": "The ultimate browser extension that seamlessly injects scripts built from custom commands.",
+  "background": { "service_worker": "background.bundle.js" },
+  "icons": {
+    "34": "icon-34.png",
+    "128": "icon-128.png"
+  },
+  "action": {
+    "default_title": "Click to open"
+  },
+  "permissions": [
+    "windows",
+    "tabs",
+    "tts",
+    "alarms",
+    "scripting",
+    "userScripts",
+    "webNavigation",
+    "sidePanel",
+    "declarativeNetRequest",
+    "unlimitedStorage"
+  ],
+  "optional_permissions": [ "notifications"],
+  "sandbox": {
+    "pages": ["sandbox.html"]
+  },
+  "content_security_policy": {
+    "extension_page": "default-src https:; script-src https: 'unsafe-inline' 'unsafe-eval'; style-src https: 'unsafe-inline'"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["*"],
+      "extension_ids": ["*"],
+      "matches": ["*://*/*"]
+    }
+  ],
+  "host_permissions": ["http://*/", "https://*/"]
+}
