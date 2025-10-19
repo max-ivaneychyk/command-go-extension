@@ -1,46 +1,134 @@
 import {browser} from "../const/extension";
 import {IS_DEV} from "../const/support";
+import ScenarioFacade from "./ScenarioFacade";
 
-let actions = {
-  "PING": () => {
-    return Promise.resolve("Pong")
+/**
+ * Default action handlers for the extension
+ */
+const DEFAULT_ACTIONS = {
+  /**
+   * Ping handler - returns pong for connectivity testing
+   */
+  PING: () => Promise.resolve("Pong"),
+  
+  /**
+   * Status handler - returns extension version
+   */
+  STATUS: () => Promise.resolve(browser.runtime.getManifest().version),
+  
+  /**
+   * Install script handler - installs a script using ScenarioFacade
+   * @param {Object} params - Parameters containing script data
+   */
+  INSTALL_SCRIPT: async (params) => {
+    if (!params.script) {
+      throw new Error('Script parameter is required');
+    }
+    
+    const scriptData = JSON.parse(params.script);
+    await new ScenarioFacade(scriptData).install();
+    return "Script installed successfully";
   },
+  
+  /**
+   * Uninstall script handler - uninstalls a script using ScenarioFacade
+   * @param {Object} params - Parameters containing script data
+   */
+  UNINSTALL_SCRIPT: async (params) => {
+    if (!params.script) {
+      throw new Error('Script parameter is required');
+    }
+    
+    const scriptData = JSON.parse(params.script);
+    await new ScenarioFacade(scriptData).uninstall();
+    return "Script uninstalled successfully";
+  }
 };
 
-browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  const msg = message;
+// Current actions registry using Map for efficient lookup
+let actions = new Map(Object.entries(DEFAULT_ACTIONS));
+
+/**
+ * Message handler for runtime messages
+ * @param {Object} message - Message object
+ * @param {Object} sender - Sender information
+ * @param {Function} sendResponse - Response callback
+ * @returns {boolean} Whether to keep the message channel open
+ */
+const handleRuntimeMessage = (message, sender, sendResponse) => {
+  const { type, key, params } = message;
   const tab = sender.tab;
 
-  if (msg.type === 'FROM_CONTENT' || msg.type === 'FROM_SIDEPANEL') return false;
-  if (IS_DEV) console.log("Pending action", msg);
-
-  const action = actions[msg.key];
-
-  if (!action) {
-    console.error("Not found action for ", msg)
+  // Skip internal extension messages
+  if (type === 'FROM_CONTENT' || type === 'FROM_SIDEPANEL') {
     return false;
   }
 
-  action(msg.params, {tabId: tab ? tab.id : null})
+  if (IS_DEV) {
+    console.log("Processing action:", { key, params });
+  }
+
+  const action = actions.get(key);
+
+  if (!action) {
+    console.error("Action not found:", key);
+    sendResponse({ key, err: { message: `Action '${key}' not found` } });
+    return false;
+  }
+
+  // Execute action with error handling
+  Promise.resolve()
+    .then(() => action(params, { tabId: tab?.id }))
     .then(data => {
-      sendResponse(({key: msg.key, data}));
+      sendResponse({ key, data });
     })
     .catch(err => {
-      sendResponse(({key: msg.key, err}));
-    })
+      console.error(`Error executing action '${key}':`, err);
+      sendResponse({ key, err: { message: err.message, stack: err.stack } });
+    });
 
-  return true; /// await sendResponse
-})
+  return true; // Keep message channel open for async response
+};
 
+/**
+ * Messenger class for managing action handlers
+ */
 class Messenger {
-
-  static registerHandlers(mapActions) {
-    actions = {
-      ...actions,
-      ...mapActions
+  /**
+   * Register additional action handlers
+   * @param {Object} newActions - Object containing new action handlers
+   */
+  static registerHandlers(newActions) {
+    // Convert object to Map entries and merge with existing actions
+    const newActionEntries = Object.entries(newActions);
+    newActionEntries.forEach(([key, handler]) => {
+      actions.set(key, handler);
+    });
+    
+    if (IS_DEV) {
+      console.log("Registered new handlers:", Object.keys(newActions));
     }
+  }
+
+  /**
+   * Get all registered action keys
+   * @returns {string[]} Array of action keys
+   */
+  static getRegisteredActions() {
+    return Array.from(actions.keys());
+  }
+
+  /**
+   * Check if an action is registered
+   * @param {string} key - Action key to check
+   * @returns {boolean} Whether the action is registered
+   */
+  static hasAction(key) {
+    return actions.has(key);
   }
 }
 
+// Initialize message listener
+browser.runtime.onMessage.addListener(handleRuntimeMessage);
 
-export default Messenger
+export default Messenger;

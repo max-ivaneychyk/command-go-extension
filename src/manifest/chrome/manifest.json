@@ -36,5 +36,11 @@
       "matches": ["*://*/*"]
     }
   ],
+  "content_scripts": [
+    {
+      "matches": ["https://commandgo.org/*", "http://localhost:3000/*"],
+      "js": ["storeScript.bundle.js"]
+    }
+  ],
   "host_permissions": ["http://*/", "https://*/"]
 }
