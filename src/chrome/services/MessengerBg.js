@@ -29,6 +29,19 @@ const DEFAULT_ACTIONS = {
     await new ScenarioFacade(scriptData).install();
     return "Script installed successfully";
   },
+
+  /**
+   * Get script handler - gets a script using ScenarioFacade
+   * @param {Object} params - Parameters containing script data
+   */
+  GET_SCRIPT: async (params) => {
+    if (!params.script) {
+      throw new Error('Script parameter is required');
+    }
+
+    const scriptData = JSON.parse(params.script);
+    return new ScenarioFacade(scriptData).db.get(scriptData.$$uuid);
+  },
   
   /**
    * Uninstall script handler - uninstalls a script using ScenarioFacade

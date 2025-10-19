@@ -9,14 +9,16 @@
 const MESSAGE_TYPES = {
   STATUS: '>>STATUS',
   INSTALL_SCRIPT: '>>INSTALL_SCRIPT',
-  UNINSTALL_SCRIPT: '>>UNINSTALL_SCRIPT'
+  UNINSTALL_SCRIPT: '>>UNINSTALL_SCRIPT',
+  GET_SCRIPT: '>>GET_SCRIPT'
 };
 
 // Response types
 const RESPONSE_TYPES = {
   STATUS: '<<STATUS',
   INSTALL_SCRIPT: '<<INSTALL_SCRIPT',
-  UNINSTALL_SCRIPT: '<<UNINSTALL_SCRIPT'
+  UNINSTALL_SCRIPT: '<<UNINSTALL_SCRIPT',
+  GET_SCRIPT: '<<GET_SCRIPT'
 };
 
 /**
@@ -87,11 +89,25 @@ const handleUninstallScriptRequest = async (event) => {
   }
 };
 
+/**
+ * Handles script get requests
+ * @param {MessageEvent} event - Message event
+ */
+const handleGetScriptRequest = async (event) => {
+  try {
+    const data = await sendToExtension('GET_SCRIPT', event.data);
+    sendResponse(event, RESPONSE_TYPES.GET_SCRIPT, data.data, 'ok');
+  } catch (err) {
+    sendResponse(event, RESPONSE_TYPES.GET_SCRIPT, err.err, 'error');
+  }
+};
+
 // Message handler map for efficient routing (declared after functions)
 const MESSAGE_HANDLERS = new Map([
   [MESSAGE_TYPES.STATUS, handleStatusRequest],
   [MESSAGE_TYPES.INSTALL_SCRIPT, handleInstallScriptRequest],
-  [MESSAGE_TYPES.UNINSTALL_SCRIPT, handleUninstallScriptRequest]
+  [MESSAGE_TYPES.UNINSTALL_SCRIPT, handleUninstallScriptRequest],
+  [MESSAGE_TYPES.GET_SCRIPT, handleGetScriptRequest]
 ]);
 
 /**
