@@ -26,7 +26,7 @@ const DEFAULT_ACTIONS = {
     }
     
     const scriptData = JSON.parse(params.script);
-    await new ScenarioFacade(scriptData).install();
+    await new ScenarioFacade(scriptData).save();
     return "Script installed successfully";
   },
 
@@ -53,7 +53,7 @@ const DEFAULT_ACTIONS = {
     }
     
     const scriptData = JSON.parse(params.script);
-    await new ScenarioFacade(scriptData).uninstall();
+    await new ScenarioFacade(scriptData).delete();
     return "Script uninstalled successfully";
   }
 };
