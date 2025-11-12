@@ -3,7 +3,8 @@ import Command from '../components/Command';
 import { MdCheck, MdDelete, MdEdit } from 'react-icons/md';
 import { Button, Checkbox } from 'rsuite';
 import { BiImport } from 'react-icons/bi';
-import { IoAddSharp } from 'react-icons/io5';
+import { IoAddSharp, IoEarthOutline, IoStorefront } from 'react-icons/io5';
+import { FaGithub } from 'react-icons/fa';
 import Placeholder from '../components/Placeholder';
 import { MESSAGES, SCHEME_AS } from '../const/scheme';
 import DialogCreate from '../components/Modal';
@@ -206,6 +207,39 @@ const List = ({
           >
             <BiImport className={'inline w-3.5 h-3.5 mr-0.5'} /> Import
           </Button>
+        </div>
+
+        <div className={'mt-6 pt-4 border-t border-gray-200 dark:border-gray-700'}>
+          <p className={'text-xs text-gray-600 dark:text-gray-400 mb-2'}>Quick Links:</p>
+          <div className={'flex flex-wrap gap-2'}>
+            <a
+              href="https://commandgo.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={'badge badge-blue !inline-flex items-center text-xs hover:underline !text-white'}
+            >
+              <IoEarthOutline className={'mr-1 w-3.5 h-3.5'} />
+              Website
+            </a>
+            <a
+              href="https://commandgo.org/marketplace"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={'badge badge-blue !inline-flex items-center text-xs hover:underline !text-white'}
+            >
+              <IoStorefront className={'mr-1 w-3.5 h-3.5'} />
+              Marketplace
+            </a>
+            <a
+              href="https://github.com/max-ivaneychyk/command-go-extension"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={'badge badge-blue !inline-flex items-center text-xs hover:underline !text-white'}
+            >
+              <FaGithub className={'mr-1 w-3.5 h-3.5'} />
+              GitHub
+            </a>
+          </div>
         </div>
 
         <DialogCreate
