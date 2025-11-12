@@ -150,6 +150,12 @@ const List = ({
                 {item.$name}
               </button>
 
+              {item.$$version && (
+                <span className={'text-xs text-gray-500 dark:text-gray-400 ml-2'}>
+                  v{item.$$version}
+                </span>
+              )}
+
               <div className={'ml-auto flex items-center'}>
                 <button
                   type={'button'}

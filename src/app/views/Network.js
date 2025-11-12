@@ -5,7 +5,7 @@ import {Commands} from "../containers/Commands";
 import {SCHEME_AS} from "../const/scheme";
 import Hint from "../components/InfoHint";
 import Tag from "../components/Tag";
-
+import VersionSelector from '../components/VersionSelector';
 const Network = ({onGoBack, Executor, values, focused}) => {
   const methods = useForm({
     values,
@@ -19,6 +19,8 @@ const Network = ({onGoBack, Executor, values, focused}) => {
       methods={methods}
       onGoBack={onGoBack}
     >
+      <VersionSelector />
+
       <Commands
         as={SCHEME_AS.NET}
         label={
