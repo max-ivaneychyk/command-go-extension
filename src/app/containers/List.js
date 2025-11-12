@@ -40,7 +40,7 @@ const QuickLinks = () => (
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className={'badge badge-blue !inline-flex items-center text-xs hover:underline !text-white'}
+          className={'badge badge-blue !inline-flex items-center text-xs hover:underline text-blue-700 dark:!text-white'}
         >
           <Icon className={'mr-1 w-3.5 h-3.5'} />
           {label}
