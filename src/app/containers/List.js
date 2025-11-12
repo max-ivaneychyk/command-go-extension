@@ -12,6 +12,44 @@ import { IconCopy } from '../components/IconClose';
 import sortBy from 'lodash/sortBy';
 import { PermissionsCtx } from '../ctx/permissions';
 
+const QUICK_LINKS = [
+  {
+    href: 'https://commandgo.org/',
+    label: 'Website',
+    icon: IoEarthOutline,
+  },
+  {
+    href: 'https://commandgo.org/marketplace',
+    label: 'Marketplace',
+    icon: IoStorefront,
+  },
+  {
+    href: 'https://github.com/max-ivaneychyk/command-go-extension',
+    label: 'GitHub',
+    icon: FaGithub,
+  },
+];
+
+const QuickLinks = () => (
+  <div className={'mt-6 pt-4 border-t border-gray-200 dark:border-gray-700'}>
+    <p className={'text-xs text-gray-600 dark:text-gray-400 mb-2'}>Quick Links:</p>
+    <div className={'flex flex-wrap gap-2'}>
+      {QUICK_LINKS.map(({ href, label, icon: Icon }) => (
+        <a
+          key={href}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={'badge badge-blue !inline-flex items-center text-xs hover:underline !text-white'}
+        >
+          <Icon className={'mr-1 w-3.5 h-3.5'} />
+          {label}
+        </a>
+      ))}
+    </div>
+  </div>
+);
+
 const List = ({
   items,
   onDelete,
@@ -209,38 +247,7 @@ const List = ({
           </Button>
         </div>
 
-        <div className={'mt-6 pt-4 border-t border-gray-200 dark:border-gray-700'}>
-          <p className={'text-xs text-gray-600 dark:text-gray-400 mb-2'}>Quick Links:</p>
-          <div className={'flex flex-wrap gap-2'}>
-            <a
-              href="https://commandgo.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={'badge badge-blue !inline-flex items-center text-xs hover:underline !text-white'}
-            >
-              <IoEarthOutline className={'mr-1 w-3.5 h-3.5'} />
-              Website
-            </a>
-            <a
-              href="https://commandgo.org/marketplace"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={'badge badge-blue !inline-flex items-center text-xs hover:underline !text-white'}
-            >
-              <IoStorefront className={'mr-1 w-3.5 h-3.5'} />
-              Marketplace
-            </a>
-            <a
-              href="https://github.com/max-ivaneychyk/command-go-extension"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={'badge badge-blue !inline-flex items-center text-xs hover:underline !text-white'}
-            >
-              <FaGithub className={'mr-1 w-3.5 h-3.5'} />
-              GitHub
-            </a>
-          </div>
-        </div>
+        <QuickLinks />
 
         <DialogCreate
           title={MESSAGES.CREATE[schema]}
