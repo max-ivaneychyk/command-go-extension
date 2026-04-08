@@ -150,9 +150,19 @@ const List = ({
           onChange={onImport}
         />
         <h1 className={'text-lg h2'}>
-          {!!items.length && 'Select one of scheme to view or edit'}
+          {!!items.length && 'Select a scenario to view or edit'}
         </h1>
-        {!items.length && <Placeholder>No any schemes yet</Placeholder>}
+        {!items.length && (
+          <div className={'dark:bg-[#242424] dark:border dark:border-[#373737] bg-blue-50 rounded my-2 p-4 text-center'}>
+            <p className={'text-gray-700 dark:text-white font-medium mb-1'}>No scenarios yet</p>
+            <p className={'text-gray-500 dark:text-gray-400 text-sm mb-3'}>
+              Scenarios let you automate any webpage — click a button, fill a form, extract data, and more.
+            </p>
+            <p className={'text-gray-500 dark:text-gray-400 text-xs'}>
+              Click <strong>Create</strong> below to build your first scenario, or <strong>Import</strong> one from a file.
+            </p>
+          </div>
+        )}
         {sortBy(items, [(o) => o.$name.toLowerCase()]).map((item) => {
           const isChecked = !!selected[item.$$uuid];
 
