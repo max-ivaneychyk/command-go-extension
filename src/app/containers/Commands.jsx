@@ -208,22 +208,15 @@ function CommandSuggestions({fields, as, list, nested, onSelect}) {
         }
       </div>
       {suggestions.length > 0 && (
-        <div className={'flex flex-wrap gap-1.5 mt-2'}>
+        <div className={'flex flex-wrap gap-1 mt-1.5'}>
           {suggestions.map(({id, name, icon}) => (
             <button
               key={id}
               type={'button'}
               onClick={() => onSelect(id)}
-              className={
-                'inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-[10px] ' +
-                'border border-blue-200 dark:border-blue-800' +
-                'bg-blue-50 dark:bg-blue-900/30 ' +
-                'text-blue-700 dark:text-blue-300 ' +
-                'hover:bg-blue-100 dark:hover:bg-blue-900/50 ' +
-                'cursor-pointer transition-colors'
-              }
+              className={'badge badge-blue text-default leading-default inline-flex items-center gap-1 cursor-pointer'}
             >
-              <span className={'flex-shrink-0 [&>svg]:w-2 [&>svg]:h-2'}>{icon}</span>
+              <span className={'flex-shrink-0 [&>svg]:w-3 [&>svg]:h-3'}>{icon}</span>
               {name}
             </button>
           ))}
