@@ -3,6 +3,7 @@ import Input from "../components/Input";
 import {TRIGGERS} from "../const/triggers";
 import hooks from './Alarm.hooks'
 import {SCENARIO_EXECUTION_MODE} from "../const/scheme";
+import {TbClock} from "react-icons/tb";
 
 const scheme = {
   type: TRIGGERS.ALARM,
@@ -14,22 +15,20 @@ const scheme = {
 const Control = ({name}) => {
   return (
     <>
-      Schedule:
-      delay In
+      Run after
       <Input
         name={`${name}delayInMinutes`}
         placeholder={"1"}
         type={'number'}
         className={'ml-2 badge badge-grey cursor-pointer'}
       />
-      Minutes and
-      period In
+      min, repeat every
       <Input
         name={`${name}periodInMinutes`}
         placeholder={"1"}
         type={'number'}
         className={'ml-2 badge badge-grey cursor-pointer'}
-      /> Minutes
+      /> min
     </>
   )
 }
@@ -40,5 +39,6 @@ export const AlarmTrigger = {
   hooks,
   mode: SCENARIO_EXECUTION_MODE.BG,
   label: "By Schedule",
+  icon: TbClock,
 }
 

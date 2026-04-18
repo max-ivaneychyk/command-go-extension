@@ -4,6 +4,7 @@ import {LOAD_URL_CONDITION, TRIGGERS} from "../const/triggers";
 import Dropdown from "../components/Dropdown";
 import {useFieldArray, useFormContext} from "react-hook-form";
 import {SCENARIO_EXECUTION_MODE} from "../const/scheme";
+import {IoEarthOutline} from "react-icons/io5";
 
 export const actions = [
   {name: "Loading completed", id: "complete"},
@@ -95,5 +96,6 @@ export const URLLoadTabTrigger = {
   scheme,
   mode: SCENARIO_EXECUTION_MODE.CONTENT,
   label: "Load Site URL",
+  icon: IoEarthOutline,
 }
 

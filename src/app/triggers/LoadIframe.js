@@ -4,6 +4,7 @@ import {LOAD_URL_CONDITION, TRIGGERS} from "../const/triggers";
 import Dropdown from "../components/Dropdown";
 import {useFieldArray, useFormContext} from "react-hook-form";
 import {SCENARIO_EXECUTION_MODE} from "../const/scheme";
+import {TbFrame} from "react-icons/tb";
 
 const conditions = [
   {id: LOAD_URL_CONDITION.START, name: "URL - start with"},
@@ -85,5 +86,6 @@ export const URLLoadIframeTrigger = {
   scheme,
   mode: SCENARIO_EXECUTION_MODE.CONTENT,
   label: "Load Iframe URL",
+  icon: TbFrame,
 }
 
