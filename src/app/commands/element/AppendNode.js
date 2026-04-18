@@ -1,7 +1,7 @@
 import {useSaveResultTo} from "../../hooks/useSaveResultTo";
 import React from 'react';
-import IconCommand from "../../components/IconCommand";
-import { CgCodeSlash } from "react-icons/cg";
+import IconCommand, {ICON_COLOR} from "../../components/IconCommand";
+import { MdOutlinePostAdd } from "react-icons/md";
 import run from './AppendNode.run'
 import {COMMANDS} from "../../const/commands";
 import {SCENARIO_EXECUTION_MODE} from "../../const/scheme";
@@ -26,7 +26,7 @@ const Control = ({name}) => {
 
 
 export const AppendNodeCommand = {
-  icon:  <IconCommand Svg={CgCodeSlash} />,
+  icon:  <IconCommand Svg={MdOutlinePostAdd} className={ICON_COLOR.BLUE}/>,
   label: "Append Element",
   Control,
   mode: SCENARIO_EXECUTION_MODE.CONTENT,

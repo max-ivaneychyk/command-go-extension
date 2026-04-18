@@ -1,9 +1,9 @@
 import {useSaveResultTo} from "../../hooks/useSaveResultTo";
 import React from 'react';
 import {getInitialScheme, useSelectFrom} from "../../hooks/useSelectFrom";
-import IconCommand from "../../components/IconCommand";
+import IconCommand, {ICON_COLOR} from "../../components/IconCommand";
 import run from "./SetAttrNode.run";
-import {CgCodeSlash} from "react-icons/cg";
+import {MdNewLabel} from "react-icons/md";
 import {COMMANDS} from "../../const/commands";
 import {SCENARIO_EXECUTION_MODE} from "../../const/scheme";
 
@@ -35,7 +35,7 @@ const Control = ({name}) => {
 
 
 export const SetAttrNodeCommand = {
-  icon:  <IconCommand Svg={CgCodeSlash} />,
+  icon:  <IconCommand Svg={MdNewLabel} className={ICON_COLOR.YELLOW}/>,
   Control,
   run,
   mode: SCENARIO_EXECUTION_MODE.CONTENT,

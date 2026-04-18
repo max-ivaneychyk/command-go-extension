@@ -3,6 +3,7 @@ import IconCommand, { ICON_COLOR } from "../../components/IconCommand";
 import { getInitialScheme, useSelectFrom } from "../../hooks/useSelectFrom";
 import LinkToDoc from "../../components/LinkToDoc";
 import { COMMANDS } from "../../const/commands";
+import { MdClose } from "react-icons/md";
 
 const scheme = {
   type: COMMANDS.CLOSE_TAB,
@@ -26,7 +27,7 @@ const Control = ({ name }) => {
 
 export const CloseTabCommand = {
   label: "Close Browser Tab",
-  icon: <IconCommand Svg={"TbClose"} className={ICON_COLOR.RED} />,
+  icon: <IconCommand Svg={MdClose} className={ICON_COLOR.RED} />,
   Control,
   scheme,
   group: "Browser API",

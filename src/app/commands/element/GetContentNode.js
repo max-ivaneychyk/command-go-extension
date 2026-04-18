@@ -3,7 +3,7 @@ import React from 'react';
 import IconCommand, {ICON_COLOR} from "../../components/IconCommand";
 import run from "./GetContentNode.run";
 import {TEXT} from "../../const/messages";
-import {CgCodeSlash} from "react-icons/cg";
+import {TbFileText} from "react-icons/tb";
 import {COMMANDS} from "../../const/commands";
 import {SCENARIO_EXECUTION_MODE} from "../../const/scheme";
 
@@ -26,7 +26,7 @@ const Control = ({name}) => {
 
 
 export const GetContentNodeCommand = {
-  icon:   <IconCommand Svg={CgCodeSlash}  className={ICON_COLOR.BLUE}/>,
+  icon:   <IconCommand Svg={TbFileText}  className={ICON_COLOR.BLUE}/>,
   label: "Get InnerText of Element",
   Control,
   mode: SCENARIO_EXECUTION_MODE.CONTENT,

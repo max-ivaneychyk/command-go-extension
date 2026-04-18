@@ -3,6 +3,7 @@ import {dropdownOption, getInitialScheme, inputOption, numberOption, SelectFrom}
 import run from "./TTSSpeak.run";
 import {COMMANDS} from "../../const/commands";
 import IconCommand, {ICON_COLOR} from "../../components/IconCommand";
+import {HiSpeakerWave} from "react-icons/hi2";
 import {browser} from "../../../chrome/const/extension";
 import {useFormContext} from "react-hook-form";
 
@@ -60,7 +61,7 @@ const Control = ({name}) => {
 }
 
 export const TTSSpeakCommand = {
-  icon: <IconCommand Svg={"Voice"} className={ICON_COLOR.GREEN}/>,
+  icon: <IconCommand Svg={HiSpeakerWave} className={ICON_COLOR.GREEN}/>,
   Control,
   run,
   scheme,

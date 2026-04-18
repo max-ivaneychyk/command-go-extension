@@ -4,6 +4,7 @@ import IconCommand, {ICON_COLOR} from "../components/IconCommand";
 import {getInitialScheme, inputOption, SelectFrom} from "../hooks/useSelectFrom";
 import run from "./Set.run";
 import {COMMANDS} from "../const/commands";
+import {TbEdit} from "react-icons/tb";
 
 const scheme = {
   type: COMMANDS.SET,
@@ -37,7 +38,7 @@ const Control = ({name}) => {
 
 
 export const SetValueCommand = {
-  icon:  <IconCommand Svg={".prop"} className={ICON_COLOR.BLUE}/>,
+  icon:  <IconCommand Svg={TbEdit} className={ICON_COLOR.BLUE}/>,
   Control,
   label: 'Set value to Object',
   run,
