@@ -1,4 +1,4 @@
-import {Drawer, ButtonToolbar, Button} from 'rsuite';
+import {Drawer} from 'rsuite';
 import React, {Fragment, useState} from "react";
 import {classNames} from "./Dropdown";
 import {SCHEME_AS} from "../const/scheme";
@@ -20,13 +20,12 @@ const SelectCommands = ({options, selected, onSelect, as}) => {
 
   return (
     <>
-      <ButtonToolbar>
-        <Button
-          className={'badge badge-blue text-default leading-default'}
-          onClick={() => setOpenWithHeader(true)}>
-          + {as !== SCHEME_AS.USER_SCRIPT ? "Command" : "Script"}
-        </Button>
-      </ButtonToolbar>
+      <button
+        type={'button'}
+        className={'badge badge-blue text-default leading-default inline-flex items-center cursor-pointer !mx-0'}
+        onClick={() => setOpenWithHeader(true)}>
+        + {as !== SCHEME_AS.USER_SCRIPT ? "Command" : "Script"}
+      </button>
 
       <Drawer open={openWithHeader} onClose={close}>
         <Drawer.Header>

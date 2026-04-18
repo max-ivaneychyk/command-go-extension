@@ -189,12 +189,22 @@ function CommandSuggestions({fields, as, list, nested, onSelect}) {
 
   return (
     <div className={'pl-7 pb-1 mt-2.5'}>
-      <div className={'flex justify-between'}>
+      <div className={'flex flex-wrap items-center gap-1'}>
         <SelectCommands
           as={as}
           options={list}
           onSelect={onSelect}
         />
+        {suggestions.map(({id, name}) => (
+          <button
+            key={id}
+            type={'button'}
+            onClick={() => onSelect(id)}
+            className={'inline-flex items-center px-1.5 py-0 rounded-full text-[10px] text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700/50 hover:text-primary hover:bg-surface-primary cursor-pointer transition-colors !mx-0'}
+          >
+            {name}
+          </button>
+        ))}
         {
           !nested &&
           <Button
@@ -207,21 +217,6 @@ function CommandSuggestions({fields, as, list, nested, onSelect}) {
           </Button>
         }
       </div>
-      {suggestions.length > 0 && (
-        <div className={'flex flex-wrap gap-1 mt-1.5'}>
-          {suggestions.map(({id, name, icon}) => (
-            <button
-              key={id}
-              type={'button'}
-              onClick={() => onSelect(id)}
-              className={'badge badge-blue text-default leading-default inline-flex items-center gap-1 cursor-pointer'}
-            >
-              <span className={'flex-shrink-0 [&>svg]:w-3 [&>svg]:h-3'}>{icon}</span>
-              {name}
-            </button>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
