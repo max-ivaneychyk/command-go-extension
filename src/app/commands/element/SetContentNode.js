@@ -17,6 +17,7 @@ const Control = ({name}) => {
   const {jsx} = useSaveResultTo({name: `${name}node`, text:""})
   const {jsx: selectFromJsx} = useSelectFrom({
     group: `${name}html`,
+    placeholder: '<p>Hello</p>'
   })
 
   return (

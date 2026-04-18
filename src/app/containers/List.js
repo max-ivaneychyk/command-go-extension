@@ -153,13 +153,24 @@ const List = ({
           {!!items.length && 'Select a scenario to view or edit'}
         </h1>
         {!items.length && (
-          <div className={'dark:bg-[#242424] dark:border dark:border-[#373737] bg-blue-50 rounded my-2 p-4 text-center'}>
-            <p className={'text-gray-700 dark:text-white font-medium mb-1'}>No scenarios yet</p>
-            <p className={'text-gray-500 dark:text-gray-400 text-sm mb-3'}>
-              Scenarios let you automate any webpage — click a button, fill a form, extract data, and more.
-            </p>
-            <p className={'text-gray-500 dark:text-gray-400 text-xs'}>
-              Click <strong>Create</strong> below to build your first scenario, or <strong>Import</strong> one from a file.
+          <div className={'dark:bg-[#242424] dark:border dark:border-[#373737] bg-blue-50 rounded my-2 p-4'}>
+            <p className={'text-gray-700 dark:text-white font-medium mb-2 text-center'}>Get started in 3 steps</p>
+            <ol className={'text-gray-500 dark:text-gray-400 text-sm list-none space-y-2 mb-0 pl-0'}>
+              <li className={'flex items-start gap-2'}>
+                <span className={'badge badge-blue !mx-0 font-bold flex-shrink-0'}>1</span>
+                <span>Click <strong>Create</strong> below and name your scenario</span>
+              </li>
+              <li className={'flex items-start gap-2'}>
+                <span className={'badge badge-blue !mx-0 font-bold flex-shrink-0'}>2</span>
+                <span>Add commands — e.g. <strong>Find Element</strong>, <strong>Fetch</strong>, or <strong>Set Variable</strong></span>
+              </li>
+              <li className={'flex items-start gap-2'}>
+                <span className={'badge badge-blue !mx-0 font-bold flex-shrink-0'}>3</span>
+                <span>Add a <strong>trigger</strong> to run automatically, or hit <strong>Run</strong> to test it</span>
+              </li>
+            </ol>
+            <p className={'text-gray-400 dark:text-gray-500 text-xs mt-3 text-center'}>
+              You can also <strong>Import</strong> a scenario from a file or browse the <a href="https://commandgo.org/marketplace" target="_blank" rel="noopener noreferrer" className={'text-blue-500 hover:underline'}>Marketplace</a>
             </p>
           </div>
         )}

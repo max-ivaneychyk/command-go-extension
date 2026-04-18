@@ -8,6 +8,7 @@ import NestedView from "../../components/NestedView";
 import run from "./ForOf.run";
 import { GrIteration } from "react-icons/gr";
 import {COMMANDS} from "../../const/commands";
+import CommandInfo from "../../components/CommandInfo";
 
 const scheme = {
   type: COMMANDS.FOR_EACH,
@@ -43,6 +44,12 @@ const Control = ({name}) => {
 
   return (
     <>
+      <CommandInfo>
+        Iterate over each item in a list <br/>
+        -- <span className={'badge badge-grey'}>Item:</span> variable name for current item <br/>
+        -- <span className={'badge badge-grey'}>Index:</span> variable name for current index <br/>
+        -- <span className={'badge badge-grey'}>List:</span> the array variable to loop over
+      </CommandInfo>
       {collapse.control}
       forEach of item {dropDownLocalItemJsx}, index {dropDownLocalItemIJsx} from list {dropDownJsx}
       {/*return {dropDownResultJsx}*/}

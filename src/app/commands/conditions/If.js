@@ -11,6 +11,7 @@ import Remove from "../../components/Remove";
 import run from './If.run'
 import {COMMANDS} from "../../const/commands";
 import Syntax from "../../components/Syntax";
+import CommandInfo from "../../components/CommandInfo";
 
 const scheme = {
   type: COMMANDS.IF,
@@ -54,6 +55,12 @@ const Control = ({name}) => {
 
   return (
     <>
+      <CommandInfo>
+        Conditional branching <br/>
+        -- Add conditions with <span className={'badge badge-blue'}>AND</span> / <span className={'badge badge-blue'}>OR</span> logic <br/>
+        -- Use <span className={'badge badge-blue'}>+ else if</span> for additional branches <br/>
+        -- <span className={'badge badge-grey'}>Else</span> block runs when no conditions match
+      </CommandInfo>
       {collapse.control}
       {
         fields.map((item, index) => {

@@ -16,6 +16,7 @@ import ExecuteIn from "../../components/ExecuteIn";
 import {TEXT} from "../../const/messages";
 import { IoEarthOutline } from "react-icons/io5";
 import {COMMANDS} from "../../const/commands";
+import CommandInfo from "../../components/CommandInfo";
 
 const parseAsList = [
   {name: "json", id: "json"},
@@ -52,7 +53,7 @@ const Control = ({name}) => {
     group: `${name}url`,
   })
   const {jsx: saveToJsx} = useSaveResultTo({name: `${name}saveTo`, text:""})
-  const {jsx: bodyJsx} = useSelectFrom({group: `${name}body`})
+  const {jsx: bodyJsx} = useSelectFrom({group: `${name}body`, placeholder: '{"key": "value"}'})
   const collapse = useCollapse()
   const {jsx: sourceOfHeaders, mode} = useSelectFrom({
     group: `${name}sourceOfHeaders`,
@@ -62,6 +63,14 @@ const Control = ({name}) => {
 
   return (
     <>
+      <CommandInfo>
+        HTTP request <br/>
+        -- <span className={'badge badge-grey'}>Method:</span> GET, POST, PUT, PATCH, DELETE <br/>
+        -- <span className={'badge badge-grey'}>URL:</span> endpoint address <br/>
+        -- <span className={'badge badge-grey'}>Parse as:</span> json or text <br/>
+        -- <span className={'badge badge-grey'}>Headers:</span> custom request headers (optional) <br/>
+        -- <span className={'badge badge-grey'}>Body:</span> request payload for POST/PUT (optional)
+      </CommandInfo>
       {collapse.control}
       Fetch
       <Dropdown

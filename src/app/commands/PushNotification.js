@@ -15,10 +15,12 @@ const scheme = {
 const Control = ({name}) => {
   const {jsx: message} = useSelectFrom({
     group: `${name}value`,
+    placeholder: 'Notification body'
   })
 
   const {jsx: title} = useSelectFrom({
     group: `${name}title`,
+    placeholder: 'Notification title'
   })
 
   return (

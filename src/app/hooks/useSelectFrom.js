@@ -28,7 +28,7 @@ export const getInitialScheme = ({value = '', as = inputOption.id} = {}) => {
   }
 }
 
-export const useSelectFrom = ({label = '', onClear,  inputType, components, group, options, placeholder = 'https://..'}) => {
+export const useSelectFrom = ({label = '', onClear,  inputType, components, group, options, placeholder = 'value'}) => {
   const from = group.concat(".as");
   const name = group.concat(".value");
 
