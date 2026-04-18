@@ -2,6 +2,7 @@ import React from 'react';
 import IconCommand, {ICON_COLOR} from "../../components/IconCommand";
 import run from "./Array.prototype.filter.run";
 import {ArrayMapCommand, ARRAY_METHOD} from "./Array.prototype.map";
+import {TbFilter} from "react-icons/tb";
 
 const scheme = {
   ...ArrayMapCommand.scheme,
@@ -9,7 +10,7 @@ const scheme = {
 }
 
 export const ArrayFilterCommand = {
-  icon: <IconCommand Svg={"filter"} className={ICON_COLOR.YELLOW}/>,
+  icon: <IconCommand Svg={TbFilter} className={ICON_COLOR.YELLOW}/>,
   Control: ArrayMapCommand.Control,
   run,
   scheme,
