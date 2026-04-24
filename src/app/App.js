@@ -50,12 +50,12 @@ function App({Executor, href, name}) {
       List: ListOfNetwork,
       View: Network,
     },
-    {
+   /* {
       id: 'permissions',
       hook: [],
       List: Permissions,
       View: () => null,
-    }
+    }*/
   ].filter(({id}) => {
     // USER_SCRIPT is not supported and net is not tested
     return !(BROWSER === 'firefox' && [SCHEME_AS.USER_SCRIPT, SCHEME_AS.NET].includes(id));
