@@ -6,7 +6,7 @@ import { BiImport } from 'react-icons/bi';
 import { IoAddSharp, IoEarthOutline, IoStorefront } from 'react-icons/io5';
 import { FaGithub } from 'react-icons/fa';
 import Placeholder from '../components/Placeholder';
-import { MESSAGES, SCHEME_AS } from '../const/scheme';
+import { MESSAGES, SCHEME_AS, UI_TABS } from '../const/scheme';
 import DialogCreate from '../components/Modal';
 import { IconCopy } from '../components/IconClose';
 import sortBy from 'lodash/sortBy';
@@ -149,8 +149,8 @@ const List = ({
           accept={'application/json'}
           onChange={onImport}
         />
-        <h1 className={'text-lg h2'}>
-          {!!items.length && 'Select a scenario to view or edit'}
+        <h1 className={'text-sm h2'}>
+          {!!items.length && `Select ${UI_TABS[schema]?.toLowerCase() || 'item'} to view or edit`}
         </h1>
         {!items.length && (
           <div className={'dark:bg-[#242424] dark:border dark:border-[#373737] bg-blue-50 rounded my-2 p-4'}>
