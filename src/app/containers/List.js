@@ -12,6 +12,41 @@ import { IconCopy } from '../components/IconClose';
 import sortBy from 'lodash/sortBy';
 import { PermissionsCtx } from '../ctx/permissions';
 
+const EMPTY_STATE = {
+  [SCHEME_AS.COMMAND]: {
+    steps: [
+      <>Click <strong>Create</strong> below and name your scenario</>,
+      <>Add commands — e.g. <strong>Find Element</strong>, <strong>Fetch</strong>, or <strong>Set Variable</strong></>,
+      <>Add a <strong>trigger</strong> to run automatically, or hit <strong>Run</strong> to test it</>,
+    ],
+    footer: <>You can also <strong>Import</strong> a scenario from a file or browse the <a href="https://commandgo.org/marketplace" target="_blank" rel="noopener noreferrer" className={'text-blue-500 hover:underline'}>Marketplace</a></>,
+  },
+  [SCHEME_AS.USER_SCRIPT]: {
+    steps: [
+      <>Click <strong>Create</strong> below and name your script</>,
+      <>Write or paste your <strong>JavaScript</strong> code</>,
+      <>Choose when to <strong>inject</strong> — on page load, on click, or via a trigger</>,
+    ],
+    footer: <>You can also <strong>Import</strong> a script from a file or browse the <a href="https://commandgo.org/marketplace" target="_blank" rel="noopener noreferrer" className={'text-blue-500 hover:underline'}>Marketplace</a></>,
+  },
+  [SCHEME_AS.NET]: {
+    steps: [
+      <>Click <strong>Create</strong> below and name your rule</>,
+      <>Set a <strong>URL pattern</strong> to match requests</>,
+      <>Define <strong>headers</strong> to add, modify, or remove</>,
+    ],
+    footer: <>You can also <strong>Import</strong> a rule from a file</>,
+  },
+  [SCHEME_AS.ALARMS]: {
+    steps: [
+      <>Click <strong>Create</strong> below and name your alarm</>,
+      <>Set a <strong>schedule</strong> — interval or specific time</>,
+      <>Add <strong>commands</strong> to execute when the alarm fires</>,
+    ],
+    footer: <>You can also <strong>Import</strong> an alarm from a file</>,
+  },
+};
+
 const QUICK_LINKS = [
   {
     href: 'https://commandgo.org/',
@@ -152,25 +187,19 @@ const List = ({
         <h1 className={'text-sm h2'}>
           {!!items.length && `Select ${UI_TABS[schema]?.toLowerCase() || 'item'} to view or edit`}
         </h1>
-        {!items.length && (
+        {!items.length && EMPTY_STATE[schema] && (
           <div className={'dark:bg-[#242424] dark:border dark:border-[#373737] bg-blue-50 rounded my-2 p-4'}>
             <p className={'text-gray-700 dark:text-white font-medium mb-2 text-center'}>Get started in 3 steps</p>
             <ol className={'text-gray-500 dark:text-gray-400 text-sm list-none space-y-2 mb-0 pl-0'}>
-              <li className={'flex items-start gap-2'}>
-                <span className={'badge badge-blue !mx-0 font-bold flex-shrink-0'}>1</span>
-                <span>Click <strong>Create</strong> below and name your scenario</span>
-              </li>
-              <li className={'flex items-start gap-2'}>
-                <span className={'badge badge-blue !mx-0 font-bold flex-shrink-0'}>2</span>
-                <span>Add commands — e.g. <strong>Find Element</strong>, <strong>Fetch</strong>, or <strong>Set Variable</strong></span>
-              </li>
-              <li className={'flex items-start gap-2'}>
-                <span className={'badge badge-blue !mx-0 font-bold flex-shrink-0'}>3</span>
-                <span>Add a <strong>trigger</strong> to run automatically, or hit <strong>Run</strong> to test it</span>
-              </li>
+              {EMPTY_STATE[schema].steps.map((step, i) => (
+                <li key={i} className={'flex items-start gap-2'}>
+                  <span className={'badge badge-blue !mx-0 font-bold flex-shrink-0'}>{i + 1}</span>
+                  <span>{step}</span>
+                </li>
+              ))}
             </ol>
             <p className={'text-gray-400 dark:text-gray-500 text-xs mt-3 text-center'}>
-              You can also <strong>Import</strong> a scenario from a file or browse the <a href="https://commandgo.org/marketplace" target="_blank" rel="noopener noreferrer" className={'text-blue-500 hover:underline'}>Marketplace</a>
+              {EMPTY_STATE[schema].footer}
             </p>
           </div>
         )}
