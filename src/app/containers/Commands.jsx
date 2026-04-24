@@ -212,7 +212,7 @@ function CommandSuggestions({fields, as, list, nested, onSelect}) {
             onClick={() => {
               window.open('https://forms.gle/SZT1BhGPnQLBxrju5');
             }}
-            className="badge-indigo badge ml-auto text-default leading-default">
+            className="badge-indigo badge !ml-auto text-default leading-default">
             > Request a new feature
           </Button>
         }

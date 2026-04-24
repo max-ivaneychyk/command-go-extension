@@ -9,7 +9,7 @@ const CommandInfo = ({children}) => {
       content={children}
       trigger={'hover'}
     >
-      <span className={'absolute inline-flex left-[38px] top-[26px] opacity-40 hover:opacity-100 transition-opacity'}>
+      <span className={'absolute inline-flex left-[28px] top-[26px] opacity-40 hover:opacity-100 transition-opacity'}>
            <MdInfo className={'text-blue-500'}/>
       </span>
     </Popper>
