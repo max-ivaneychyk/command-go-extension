@@ -8,6 +8,7 @@ import {infoStyles, warningStyles} from "../components/NotificationMessage";
 import ScenarioFacade from "../../chrome/services/ScenarioFacade";
 import {isActualVersion, latestVersion, migrate} from "../migrations";
 import {nanoid} from "nanoid";
+import {browser} from "../../chrome/const/extension";
 
 const TABLES = {
   [SCHEME_AS.COMMAND]: Database.tables.scenarios,
@@ -209,6 +210,26 @@ export const useManageList = (schema, {onSelect, getInitial, focused}) => {
   useEffect(() => {
     if (focused) getAll();
   }, [getAll, focused]);
+
+  useEffect(() => {
+    const listener = (message) => {
+      if (message.type !== 'SCRIPT_CHANGED') return;
+      if (message.schema !== schema) return;
+
+      getAll();
+
+      const verbs = {install: 'installed', uninstall: 'uninstalled', update: 'updated'};
+      const verb = verbs[message.action] || message.action;
+      actions.append({
+        children: `"${message.name}" has been ${verb} from the site.`,
+        allowClear: true,
+        pallet: infoStyles
+      });
+    };
+
+    browser.runtime.onMessage.addListener(listener);
+    return () => browser.runtime.onMessage.removeListener(listener);
+  }, [schema, getAll, actions]);
 
   return {
     items,

@@ -24,9 +24,21 @@ const DEFAULT_ACTIONS = {
     if (!params.script) {
       throw new Error('Script parameter is required');
     }
-    
+
     const scriptData = JSON.parse(params.script);
-    await new ScenarioFacade(scriptData).save();
+    const facade = new ScenarioFacade(scriptData);
+    const existing = await facade.db.get(scriptData.$$uuid);
+    await facade.save();
+    const action = existing ? 'update' : 'install';
+    setTimeout(() => {
+      browser.runtime
+        .sendMessage({
+          type: 'SCRIPT_CHANGED',
+          action,
+          name: scriptData.$name,
+          schema: scriptData.$$schema,
+        })
+    })
     return "Script installed successfully";
   },
 
@@ -51,9 +63,18 @@ const DEFAULT_ACTIONS = {
     if (!params.script) {
       throw new Error('Script parameter is required');
     }
-    
+
     const scriptData = JSON.parse(params.script);
     await new ScenarioFacade(scriptData).delete();
+    setTimeout(() => {
+      browser.runtime
+        .sendMessage({
+          type: 'SCRIPT_CHANGED',
+          action: 'uninstall',
+          name: scriptData.$name,
+          schema: scriptData.$$schema,
+        })
+    })
     return "Script uninstalled successfully";
   }
 };
@@ -73,7 +94,7 @@ const handleRuntimeMessage = (message, sender, sendResponse) => {
   const tab = sender.tab;
 
   // Skip internal extension messages
-  if (type === 'FROM_CONTENT' || type === 'FROM_SIDEPANEL') {
+  if (type === 'FROM_CONTENT' || type === 'FROM_SIDEPANEL' || type === 'SCRIPT_CHANGED') {
     return false;
   }
 
