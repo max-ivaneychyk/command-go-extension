@@ -5,6 +5,7 @@ import {TEXT} from "../../const/messages";
 import Dropdown from "../../components/Dropdown";
 import run from "./Array.prototype.map.run";
 import {ARRAY_METHOD as methods} from "../../const/array";
+import {TbArrowsExchange} from "react-icons/tb";
 
 export const ARRAY_METHOD = methods
 
@@ -50,7 +51,7 @@ const Control = ({name}) => {
 
 
 export const ArrayMapCommand = {
-  icon: <IconCommand Svg={"map"} className={ICON_COLOR.YELLOW}/>,
+  icon: <IconCommand Svg={TbArrowsExchange} className={ICON_COLOR.YELLOW}/>,
   Control,
   run,
   scheme,

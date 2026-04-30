@@ -8,6 +8,7 @@ import {useForm} from 'react-hook-form';
 import Tag from '../components/Tag';
 import Hint from '../components/InfoHint';
 import CatchError from "../components/CatchError";
+import VersionSelector from '../components/VersionSelector';
 
 const CommandsView = ({onGoBack, Executor, values, focused}) => {
   const [debug, setDebug] = useState(false);
@@ -29,6 +30,7 @@ const CommandsView = ({onGoBack, Executor, values, focused}) => {
       methods={methods}
       onGoBack={onGoBack}
     >
+      <VersionSelector />
       <Triggers/>
 
       <CatchError>

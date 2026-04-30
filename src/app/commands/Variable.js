@@ -7,6 +7,7 @@ import IconCommand, {ICON_COLOR} from "../components/IconCommand";
 import { HiOutlineVariable } from "react-icons/hi2";
 import run, {formats} from "./Variable.run";
 import {COMMANDS} from "../const/commands";
+import CommandInfo from "../components/CommandInfo";
 
 const scheme = {
   type: COMMANDS.INIT_VARIABLE,
@@ -22,6 +23,12 @@ const Control = ({name}) => {
 
   return (
     <>
+      <CommandInfo>
+        Create a variable and assign a value <br/>
+        -- <span className={'badge badge-grey'}>Name:</span> variable name to reference later as <span className={'badge badge-blue'}>{'{{'}varName{'}}'}</span> <br/>
+        -- <span className={'badge badge-grey'}>Value:</span> initial value <br/>
+        -- <span className={'badge badge-grey'}>Type:</span> number, string, boolean, array, or object
+      </CommandInfo>
       {saveToJsx} is <Input
         type={format}
         placeholder={'40,4,4.6'}

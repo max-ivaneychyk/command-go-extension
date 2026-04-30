@@ -4,6 +4,7 @@ import {TRIGGERS} from "../const/triggers";
 import Dropdown from "../components/Dropdown";
 import {actions} from "./LoadPage";
 import {SCENARIO_EXECUTION_MODE} from "../const/scheme";
+import {TbRegex} from "react-icons/tb";
 
 const scheme = {
   type: TRIGGERS.LOAD_URL_REG_EXP,
@@ -32,5 +33,6 @@ export const URLLoadRegExpTrigger = {
   scheme,
   mode: SCENARIO_EXECUTION_MODE.CONTENT,
   label: "Load Site URL RegExp",
+  icon: TbRegex,
 }
 

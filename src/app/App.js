@@ -50,12 +50,12 @@ function App({Executor, href, name}) {
       List: ListOfNetwork,
       View: Network,
     },
-    {
+   /* {
       id: 'permissions',
       hook: [],
       List: Permissions,
       View: () => null,
-    }
+    }*/
   ].filter(({id}) => {
     // USER_SCRIPT is not supported and net is not tested
     return !(BROWSER === 'firefox' && [SCHEME_AS.USER_SCRIPT, SCHEME_AS.NET].includes(id));
@@ -67,7 +67,7 @@ function App({Executor, href, name}) {
     <div>
 
         <div className={'fixed pt-1 top-0 w-full left-0 z-40 bg-body-layout flex flex-wrap'}>
-          {!isSmall && <p className={'pl-1 mt-3'}>v{latestVersion}</p>}
+          {!isSmall && <p className={'pl-1 mt-3'}>App v{latestVersion}</p>}
           <div className={'relative pl-1 pt-0.5 flex items-center'}>
             <Tabs>
               {

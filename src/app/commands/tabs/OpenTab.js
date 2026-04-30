@@ -30,6 +30,7 @@ const scheme = {
 const Control = ({name}) => {
   const {jsx: href} = useSelectFrom({
     group: `${name}value`,
+    placeholder: 'https://example.com'
   })
   const {jsx: saveToJsx} = useSaveResultTo({name: `${name}saveTo`, text: ""})
 

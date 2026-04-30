@@ -7,9 +7,10 @@ import run from "./FindNode.run";
 import {getInitialScheme, inputOption, useSelectFrom, variableOption} from "../../hooks/useSelectFrom";
 import {useCollapse} from "../../hooks/useCollapse";
 import {TEXT} from "../../const/messages";
-import {CgCodeSlash} from "react-icons/cg";
+import {TbTextScan2} from "react-icons/tb";
 import {COMMANDS} from "../../const/commands";
 import {SCENARIO_EXECUTION_MODE} from "../../const/scheme";
+import CommandInfo from "../../components/CommandInfo";
 
 const byCountList = [{name: "one", id: false}, {name: "all", id: true}]
 
@@ -45,6 +46,12 @@ const Control = ({name}) => {
 
   return (
     <>
+      <CommandInfo>
+        Find DOM element(s) by CSS selector <br/>
+        -- <span className={'badge badge-grey'}>Selector:</span> CSS selector, e.g. <span className={'badge badge-blue'}>#myId</span> <span className={'badge badge-blue'}>.className</span> <span className={'badge badge-blue'}>div &gt; p</span> <br/>
+        -- <span className={'badge badge-grey'}>Count:</span> one (first match) or all (NodeList) <br/>
+        -- <span className={'badge badge-grey'}>Retry:</span> seconds to wait if element not found yet
+      </CommandInfo>
       {collapse.control}
       Find
       <Dropdown
@@ -73,7 +80,7 @@ const Control = ({name}) => {
 
 
 export const FindNodeCommand = {
-  icon: <IconCommand Svg={CgCodeSlash} className={ICON_COLOR.GREY}/>,
+  icon: <IconCommand Svg={TbTextScan2} className={ICON_COLOR.GREY}/>,
   Control,
   run,
   scheme,

@@ -59,23 +59,30 @@ const DialogCreate = ({open, onClose, onApply, short = false, title}) => {
   return (
     <Dialog open={open} onClose={onClose} onApply={onApply} placeholder={title}>
       {
-        ({mode, set}) => !short && <div className={'flex items-center '}>
-          Execution mode of scenario :
-          <p
-            className={SCENARIO_EXECUTION_MODE.CONTENT === mode ? 'badge badge-blue select-none' : "badge badge-grey"}>
-            Content Page
-          </p>
-          <Toggle
-            onToggle={() => {
-              set(prev => ({
-                ...prev,
-                mode: SCENARIO_EXECUTION_MODE.CONTENT === mode ? SCENARIO_EXECUTION_MODE.BG : SCENARIO_EXECUTION_MODE.CONTENT
-              }))
-            }}
-          />
-          <p
-            className={SCENARIO_EXECUTION_MODE.BG === mode ? 'badge badge-blue select-none' : "badge badge-grey"}>
-            Background
+        ({mode, set}) => !short && <div>
+          <div className={'flex items-center'}>
+            Execution mode:
+            <p
+              className={SCENARIO_EXECUTION_MODE.CONTENT === mode ? 'badge badge-blue select-none' : "badge badge-grey"}>
+              Content Page
+            </p>
+            <Toggle
+              onToggle={() => {
+                set(prev => ({
+                  ...prev,
+                  mode: SCENARIO_EXECUTION_MODE.CONTENT === mode ? SCENARIO_EXECUTION_MODE.BG : SCENARIO_EXECUTION_MODE.CONTENT
+                }))
+              }}
+            />
+            <p
+              className={SCENARIO_EXECUTION_MODE.BG === mode ? 'badge badge-blue select-none' : "badge badge-grey"}>
+              Background
+            </p>
+          </div>
+          <p className={'text-xs text-gray-500 dark:text-gray-400 mt-1'}>
+            {SCENARIO_EXECUTION_MODE.CONTENT === mode
+              ? 'Runs on the active webpage — use this for DOM interactions, clicking, scraping, and page automation.'
+              : 'Runs in the extension background — use this for tab management, alarms, or Chrome API calls.'}
           </p>
         </div>
       }

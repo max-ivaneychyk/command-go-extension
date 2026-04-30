@@ -4,7 +4,7 @@ import IconCommand, {ICON_COLOR} from "../../components/IconCommand";
 import run from "./GetAttrNode.run";
 import {getInitialScheme, inputOption, useSelectFrom} from "../../hooks/useSelectFrom";
 import {TEXT} from "../../const/messages";
-import {CgCodeSlash} from "react-icons/cg";
+import {MdOutlineLabel} from "react-icons/md";
 import {COMMANDS} from "../../const/commands";
 import {SCENARIO_EXECUTION_MODE} from "../../const/scheme";
 
@@ -34,7 +34,7 @@ const Control = ({name}) => {
 
 
 export const GetAttrNodeCommand = {
-  icon:   <IconCommand Svg={CgCodeSlash} className={ICON_COLOR.BLUE} />,
+  icon:   <IconCommand Svg={MdOutlineLabel} className={ICON_COLOR.BLUE} />,
   Control,
   run,
   scheme,

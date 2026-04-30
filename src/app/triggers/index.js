@@ -5,13 +5,22 @@ import IconClose from "../components/IconClose";
 import {Select} from "../components/Dropdown";
 import {nanoid} from "nanoid";
 import {useCollapse} from "../hooks/useCollapse";
-import Placeholder from "../components/Placeholder";
 import {useIncreaseHistoryVersion} from "../hooks/useIncreseHistoryVersion";
 import {triggersMap} from "../map.triggers";
 import {SCENARIO_EXECUTION_MODE} from "../const/scheme";
 import Tag from "../components/Tag";
 import Hint from "../components/InfoHint";
+import {TbBolt} from "react-icons/tb";
 
+
+const TriggerIcon = ({icon: Icon}) => {
+  if (!Icon) return null;
+  return (
+    <span className={'inline-flex items-center justify-center bg-amber-100 text-amber-600 dark:bg-amber-900/40 dark:text-amber-400 rounded-lg mr-2 p-1 min-w-[28px] h-7'}>
+      <Icon className={'w-4 h-4'}/>
+    </span>
+  )
+}
 
 export const Triggers = () => {
   const methods = useFormContext();
@@ -44,8 +53,10 @@ export const Triggers = () => {
   return (
     <>
       <div className={'mx-4 flex items-center'}>
-        <Tag>Triggers: ({fields.length})
-          <Hint hint={'A trigger in a Chrome extension is any event (like tab changes, or page loads) that activates an extension’s script to perform an action.'}> </Hint>
+        <Tag>
+          <TbBolt className={'inline w-3.5 h-3.5 mr-0.5'}/>
+          Triggers{fields.length > 0 && ` (${fields.length})`}
+          <Hint hint={'Triggers run your scenario automatically: when a page loads, on a schedule, or on browser events.'}> </Hint>
         </Tag>  {collapse.control}
       </div>
 
@@ -53,25 +64,29 @@ export const Triggers = () => {
         {
           collapse.render(
             <div className={'mx-4 mb-2'}>
-              {!fields.length && <div>
-                <Placeholder>No triggers yet</Placeholder>
-              </div>}
+              {!fields.length && (
+                <p className={'text-gray-400 dark:text-gray-500 text-xs py-2 pl-1'}>
+                  No triggers yet. Add one to run this scenario automatically.
+                </p>
+              )}
 
               {fields.map((item, index) => {
-                const C = triggersMap.get(item.type).Control;
+                const trigger = triggersMap.get(item.type);
+                if (!trigger) return null;
+                const C = trigger.Control;
 
                 return (
                   <Command key={item?.key ?? item.id} className={'my-2'}>
+                    <TriggerIcon icon={trigger.icon}/>
                     <C name={`${name}.${index}.`}/>
                     <IconClose onClick={() => {
                       remove(index);
                       updateVersion();
-                    }
-                    }/>
+                    }}/>
                   </Command>)
               })}
 
-              <div className={'flex pt-1 pb-2 pl-4'}>
+              <div className={'flex pt-1 pb-2 pl-1'}>
                 <Select
                   defaultText={'+ Trigger'}
                   options={list}

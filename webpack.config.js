@@ -46,12 +46,13 @@ var options = {
 
     background: path.join(__dirname, 'src', 'pages', 'Background', 'index.js'),
     contentScript: path.join(__dirname, 'src', 'pages', 'Content', 'index.js'),
+    storeScript: path.join(__dirname, 'src', 'pages', 'Store', 'index.js'),
     //  devtools: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.js'),
     // panel: path.join(__dirname, 'src', 'pages', 'Panel', 'index.jsx'),
     sandbox: path.join(__dirname, 'src', 'pages', 'Sandbox', 'index.jsx'),
   },
   custom: {
-    notHMR: ['background', 'contentScript', 'devtools'],
+    notHMR: ['background', 'contentScript', 'storeScript', 'devtools'],
     enableBackgroundAutoReload: true, // always true when "enableContentScriptsAutoReload" is set true
     enableContentScriptsAutoReload: true,
   },

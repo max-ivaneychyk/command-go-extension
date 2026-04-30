@@ -125,7 +125,7 @@
 }
 
 .command-block {
-    @apply shadow py-2 px-2 rounded-xl relative leading-7 mx-auto dark:shadow-none;
+    @apply shadow-sm py-1.5 px-2 rounded-lg relative leading-7 mx-auto dark:shadow-none;
 }
 .rs-modal-content {
     --rs-text-heading: var(--body-color);
@@ -137,7 +137,6 @@
 .rs-checkbox-checker{
     padding-bottom: 0;
     padding-top: 0;
-    min-height: auto;
 }
 .rs-checkbox-wrapper {
     top: 3px;
@@ -281,7 +280,7 @@ body, button {
 }
 
 .h2 {
-    font-weight: 300;
+    font-weight: 400;
     word-spacing: 3px;
     line-height: 2em;
 }

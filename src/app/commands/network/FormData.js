@@ -8,7 +8,7 @@ import {
 import IconCommand, {ICON_COLOR} from "../../components/IconCommand";
 import run from "./FormData.run";
 import {TEXT} from "../../const/messages";
-import { IoEarthOutline } from "react-icons/io5";
+import { TbForms } from "react-icons/tb";
 import {COMMANDS} from "../../const/commands";
 
 const scheme = {
@@ -38,7 +38,7 @@ const Control = ({name}) => {
 
 
 export const FormDataCommand = {
-  icon: <IconCommand Svg={IoEarthOutline} className={ICON_COLOR.BLUE}/>,
+  icon: <IconCommand Svg={TbForms} className={ICON_COLOR.BLUE}/>,
   Control,
   run,
   scheme,

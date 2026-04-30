@@ -4,7 +4,7 @@ import IconCommand, {ICON_COLOR} from "../../components/IconCommand";
 import run from "./NodeCreate.run";
 import {dropdownOption, getInitialScheme, useSelectFrom} from "../../hooks/useSelectFrom";
 import {TEXT} from "../../const/messages";
-import {CgCodeSlash} from "react-icons/cg";
+import {IoMdAddCircleOutline} from "react-icons/io";
 import {COMMANDS} from "../../const/commands";
 import {SCENARIO_EXECUTION_MODE} from "../../const/scheme";
 
@@ -40,7 +40,7 @@ const Control = ({name}) => {
 
 
 export const CreateNodeCommand = {
-  icon: <IconCommand Svg={CgCodeSlash} className={ICON_COLOR.GREEN}/>,
+  icon: <IconCommand Svg={IoMdAddCircleOutline} className={ICON_COLOR.GREEN}/>,
   Control,
   run,
   scheme,

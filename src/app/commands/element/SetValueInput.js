@@ -1,6 +1,6 @@
 import {useSaveResultTo} from "../../hooks/useSaveResultTo";
 import React from 'react';
-import IconCommand from "../../components/IconCommand";
+import IconCommand, {ICON_COLOR} from "../../components/IconCommand";
 import {getInitialScheme, useSelectFrom} from "../../hooks/useSelectFrom";
 import run from "./SetValueInput.run";
 import {RxInput} from "react-icons/rx";
@@ -17,6 +17,7 @@ const Control = ({name}) => {
   const {jsx} = useSaveResultTo({name: `${name}node`, text:""})
   const {jsx: selectFromJsx} = useSelectFrom({
     group: `${name}value`,
+    placeholder: 'text to set'
   })
 
   return (
@@ -28,7 +29,7 @@ const Control = ({name}) => {
 
 
 export const SetValueInputCommand = {
-  icon:  <IconCommand Svg={RxInput} />,
+  icon:  <IconCommand Svg={RxInput} className={ICON_COLOR.YELLOW}/>,
   Control,
   run,
   mode: SCENARIO_EXECUTION_MODE.CONTENT,

@@ -9,6 +9,7 @@ import {useSaveResultTo} from "../../hooks/useSaveResultTo";
 import run from './Template.run'
 import {COMMANDS} from "../../const/commands";
 import Dropdown from "../../components/Dropdown";
+import {TbTemplate} from "react-icons/tb";
 
 const scheme = {
   type: COMMANDS.TEMPLATE,
@@ -62,7 +63,7 @@ const Control = ({name, isPortal}) => {
 
 
 export const TemplateCommand = {
-  icon: <IconCommand Svg={"</>"} className={ICON_COLOR.GREY}/>,
+  icon: <IconCommand Svg={TbTemplate} className={ICON_COLOR.GREY}/>,
   Control,
   run,
   scheme,

@@ -1,9 +1,9 @@
 import {useSaveResultTo} from "../../hooks/useSaveResultTo";
 import React from 'react';
 import {getInitialScheme, useSelectFrom} from "../../hooks/useSelectFrom";
-import IconCommand from "../../components/IconCommand";
+import IconCommand, {ICON_COLOR} from "../../components/IconCommand";
 import run from "./SetContentNode.run";
-import {CgCodeSlash} from "react-icons/cg";
+import {TbFilePencil} from "react-icons/tb";
 import {COMMANDS} from "../../const/commands";
 import {SCENARIO_EXECUTION_MODE} from "../../const/scheme";
 
@@ -17,6 +17,7 @@ const Control = ({name}) => {
   const {jsx} = useSaveResultTo({name: `${name}node`, text:""})
   const {jsx: selectFromJsx} = useSelectFrom({
     group: `${name}html`,
+    placeholder: '<p>Hello</p>'
   })
 
   return (
@@ -28,7 +29,7 @@ const Control = ({name}) => {
 
 
 export const SetContentNodeCommand = {
-  icon:  <IconCommand Svg={CgCodeSlash} />,
+  icon:  <IconCommand Svg={TbFilePencil} className={ICON_COLOR.YELLOW}/>,
   Control,
   run,
   mode: SCENARIO_EXECUTION_MODE.CONTENT,

@@ -3,13 +3,87 @@ import Command from '../components/Command';
 import { MdCheck, MdDelete, MdEdit } from 'react-icons/md';
 import { Button, Checkbox } from 'rsuite';
 import { BiImport } from 'react-icons/bi';
-import { IoAddSharp } from 'react-icons/io5';
+import { IoAddSharp, IoEarthOutline, IoStorefront } from 'react-icons/io5';
+import { FaGithub } from 'react-icons/fa';
 import Placeholder from '../components/Placeholder';
-import { MESSAGES, SCHEME_AS } from '../const/scheme';
+import { MESSAGES, SCHEME_AS, UI_TABS } from '../const/scheme';
 import DialogCreate from '../components/Modal';
 import { IconCopy } from '../components/IconClose';
 import sortBy from 'lodash/sortBy';
 import { PermissionsCtx } from '../ctx/permissions';
+
+const EMPTY_STATE = {
+  [SCHEME_AS.COMMAND]: {
+    steps: [
+      <>Click <strong>Create</strong> below and name your scenario</>,
+      <>Add commands — e.g. <strong>Find Element</strong>, <strong>Fetch</strong>, or <strong>Set Variable</strong></>,
+      <>Add a <strong>trigger</strong> to run automatically, or hit <strong>Run</strong> to test it</>,
+    ],
+    footer: <>You can also <strong>Import</strong> a scenario from a file or browse the <a href="https://commandgo.org/marketplace" target="_blank" rel="noopener noreferrer" className={'text-blue-500 hover:underline'}>Marketplace</a></>,
+  },
+  [SCHEME_AS.USER_SCRIPT]: {
+    steps: [
+      <>Click <strong>Create</strong> below and name your script</>,
+      <>Write or paste your <strong>JavaScript</strong> code</>,
+      <>Choose when to <strong>inject</strong> — on page load, on click, or via a trigger</>,
+    ],
+    footer: <>You can also <strong>Import</strong> a script from a file or browse the <a href="https://commandgo.org/marketplace" target="_blank" rel="noopener noreferrer" className={'text-blue-500 hover:underline'}>Marketplace</a></>,
+  },
+  [SCHEME_AS.NET]: {
+    steps: [
+      <>Click <strong>Create</strong> below and name your rule</>,
+      <>Set a <strong>URL pattern</strong> to match requests</>,
+      <>Define <strong>headers</strong> to add, modify, or remove</>,
+    ],
+    footer: <>You can also <strong>Import</strong> a rule from a file</>,
+  },
+  [SCHEME_AS.ALARMS]: {
+    steps: [
+      <>Click <strong>Create</strong> below and name your alarm</>,
+      <>Set a <strong>schedule</strong> — interval or specific time</>,
+      <>Add <strong>commands</strong> to execute when the alarm fires</>,
+    ],
+    footer: <>You can also <strong>Import</strong> an alarm from a file</>,
+  },
+};
+
+const QUICK_LINKS = [
+  {
+    href: 'https://commandgo.org/',
+    label: 'Website',
+    icon: IoEarthOutline,
+  },
+  {
+    href: 'https://commandgo.org/marketplace',
+    label: 'Marketplace',
+    icon: IoStorefront,
+  },
+  {
+    href: 'https://github.com/max-ivaneychyk/command-go-extension',
+    label: 'GitHub',
+    icon: FaGithub,
+  },
+];
+
+const QuickLinks = () => (
+  <div className={'mt-6 pt-4 border-t border-gray-200 dark:border-gray-700'}>
+    <p className={'text-xs text-gray-600 dark:text-gray-400 mb-2'}>Quick Links:</p>
+    <div className={'flex flex-wrap gap-2'}>
+      {QUICK_LINKS.map(({ href, label, icon: Icon }) => (
+        <a
+          key={href}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={'badge badge-blue !inline-flex items-center text-xs hover:underline text-blue-700 dark:!text-white'}
+        >
+          <Icon className={'mr-1 w-3.5 h-3.5'} />
+          {label}
+        </a>
+      ))}
+    </div>
+  </div>
+);
 
 const List = ({
   items,
@@ -110,10 +184,25 @@ const List = ({
           accept={'application/json'}
           onChange={onImport}
         />
-        <h1 className={'text-lg h2'}>
-          {!!items.length && 'Select one of scheme to view or edit'}
+        <h1 className={'text-sm h2'}>
+          {!!items.length && `Select ${UI_TABS[schema]?.toLowerCase() || 'item'} to view or edit`}
         </h1>
-        {!items.length && <Placeholder>No any schemes yet</Placeholder>}
+        {!items.length && EMPTY_STATE[schema] && (
+          <div className={'dark:bg-[#242424] dark:border dark:border-[#373737] bg-blue-50 rounded my-2 p-4'}>
+            <p className={'text-gray-700 dark:text-white font-medium mb-2 text-center'}>Get started in 3 steps</p>
+            <ol className={'text-gray-500 dark:text-gray-400 text-sm list-none space-y-2 mb-0 pl-0'}>
+              {EMPTY_STATE[schema].steps.map((step, i) => (
+                <li key={i} className={'flex items-start gap-2'}>
+                  <span className={'badge badge-blue !mx-0 font-bold flex-shrink-0'}>{i + 1}</span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
+            <p className={'text-gray-400 dark:text-gray-500 text-xs mt-3 text-center'}>
+              {EMPTY_STATE[schema].footer}
+            </p>
+          </div>
+        )}
         {sortBy(items, [(o) => o.$name.toLowerCase()]).map((item) => {
           const isChecked = !!selected[item.$$uuid];
 
@@ -149,6 +238,12 @@ const List = ({
               >
                 {item.$name}
               </button>
+
+              {item.$$version && (
+                <span className={'text-xs text-gray-500 dark:text-gray-400 ml-2'}>
+                  v{item.$$version}
+                </span>
+              )}
 
               <div className={'ml-auto flex items-center'}>
                 <button
@@ -201,6 +296,8 @@ const List = ({
             <BiImport className={'inline w-3.5 h-3.5 mr-0.5'} /> Import
           </Button>
         </div>
+
+        <QuickLinks />
 
         <DialogCreate
           title={MESSAGES.CREATE[schema]}

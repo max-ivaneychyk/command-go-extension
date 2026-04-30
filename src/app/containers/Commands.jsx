@@ -20,6 +20,7 @@ import {ReactSortable} from "react-sortablejs";
 import CatchError from "../components/CatchError";
 import Tooltip from "../components/Tooltip";
 import {PermissionsCtx} from "../ctx/permissions";
+import {COMMAND_SUGGESTIONS} from "../const/commandSuggestions";
 
 const getListStyle = () => ({
   marginBottom: "8px"
@@ -169,6 +170,57 @@ const CommandSection = ({className, dragHandler, $id, icon, name, Control, onRem
   )
 }
 
+function CommandSuggestions({fields, as, list, nested, onSelect}) {
+  const lastCommandType = fields.length > 0 ? fields[fields.length - 1].type : null;
+
+  const suggestions = useMemo(() => {
+  //  if (!lastCommandType) return [];
+    const ids = COMMAND_SUGGESTIONS[lastCommandType];
+    if (!ids) return [];
+
+    return ids
+      .map(id => {
+        const config = controlsMap.get(id);
+        if (!config || config.hidden || config.as !== as) return null;
+        return {id, name: config.label ?? id, icon: config.icon};
+      })
+      .filter(Boolean);
+  }, [lastCommandType, as]);
+
+  return (
+    <div className={'pl-7 pb-1 mt-2.5'}>
+      <div className={'flex flex-wrap items-center gap-1'}>
+        <SelectCommands
+          as={as}
+          options={list}
+          onSelect={onSelect}
+        />
+        {suggestions.map(({id, name}) => (
+          <button
+            key={id}
+            type={'button'}
+            onClick={() => onSelect(id)}
+            className={'inline-flex items-center px-1.5 py-0 rounded-full text-[10px] text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700/50 hover:text-primary hover:bg-surface-primary cursor-pointer transition-colors !mx-0'}
+          >
+            {name}
+          </button>
+        ))}
+        {
+          !nested &&
+          <Button
+            type={'button'}
+            onClick={() => {
+              window.open('https://forms.gle/SZT1BhGPnQLBxrju5');
+            }}
+            className="badge-indigo badge !ml-auto text-default leading-default">
+            > Request a new feature
+          </Button>
+        }
+      </div>
+    </div>
+  );
+}
+
 export function Commands({prefixName = '', nested, label, as = SCHEME_AS.COMMAND, open = true}) {
   const methods = useFormContext();
   const {control, watch, setValue, getValues} = methods;
@@ -313,27 +365,16 @@ export function Commands({prefixName = '', nested, label, as = SCHEME_AS.COMMAND
                 <div/>
             }
           </ReactSortable>
-          <div className={'flex pl-7 pb-1 mt-2.5 justify-between'}>
-            <SelectCommands
-              as={as}
-              options={list}
-              onSelect={(key) => {
-                append(prepareOneCommand(key))
-                updateVersion()
-              }}
-            />
-            {
-              !nested &&
-              <Button
-                type={'button'}
-                onClick={() => {
-                  window.open('https://forms.gle/SZT1BhGPnQLBxrju5');
-                }}
-                className="badge-indigo badge ml-auto text-default leading-default">
-                > Request a new feature
-              </Button>
-            }
-          </div>
+          <CommandSuggestions
+            fields={fields}
+            as={as}
+            list={list}
+            nested={nested}
+            onSelect={(key) => {
+              append(prepareOneCommand(key))
+              updateVersion()
+            }}
+          />
         </AnimateHeight>
       </ul>
     </CatchError>

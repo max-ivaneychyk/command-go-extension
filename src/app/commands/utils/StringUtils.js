@@ -4,6 +4,7 @@ import {buildUtilCommands} from "./buildUtilCommands";
 import utils from './StringUtils.conf'
 import run from './StringUtils.run'
 import {COMMANDS} from "../../const/commands";
+import {TbLetterCase} from "react-icons/tb";
 
 export const StringUtilsCommand = {
   ...buildUtilCommands({
@@ -11,7 +12,7 @@ export const StringUtilsCommand = {
     type: COMMANDS.STRING_UTILS
   }),
   run,
-  icon: <IconCommand Svg={'""'} className={ICON_COLOR.GREEN}/>,
+  icon: <IconCommand Svg={TbLetterCase} className={ICON_COLOR.GREEN}/>,
   label: "String Utils",
 }
 

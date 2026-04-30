@@ -16,6 +16,7 @@ import {formats} from "./Mapper.run";
 import run from "./Mapper.run";
 import {COMMANDS} from "../const/commands";
 import Optional from "../components/Optional";
+import {TbTransform} from "react-icons/tb";
 
 
 const scheme = {
@@ -157,7 +158,7 @@ const Control = ({name}) => {
 
 
 export const MapperCommand = {
-  icon: <IconCommand Svg={".prop"} className={ICON_COLOR.BLUE}/>,
+  icon: <IconCommand Svg={TbTransform} className={ICON_COLOR.BLUE}/>,
   Control,
   run,
   group: "Mapper",

@@ -4,6 +4,7 @@ import {useForm} from "react-hook-form";
 import {SCHEME_AS} from "../const/scheme";
 import {FormUserScripts} from "../containers/FormUserScripts";
 import Tag from "../components/Tag";
+import VersionSelector from '../components/VersionSelector';
 
 const Scripts = ({onGoBack, Executor, values, focused}) => {
   const methods = useForm({
@@ -18,6 +19,7 @@ const Scripts = ({onGoBack, Executor, values, focused}) => {
       methods={methods}
       onGoBack={onGoBack}
     >
+      <VersionSelector />
       <Commands
         as={SCHEME_AS.USER_SCRIPT}
         label={

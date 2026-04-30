@@ -11,6 +11,7 @@ import {TEXT} from "../../const/messages";
 import { FaJs } from "react-icons/fa";
 import run from './CodeJS.run'
 import {COMMANDS} from "../../const/commands";
+import CommandInfo from "../../components/CommandInfo";
 
 const scheme = {
   type: COMMANDS.CODE,
@@ -41,6 +42,13 @@ const Control = ({name, isPortal}) => {
 
   return (
     <>
+      <CommandInfo>
+        Run JavaScript in an isolated sandbox <br/>
+        -- Define a <span className={'badge badge-blue'}>main()</span> function that returns a value <br/>
+        -- Pass data via arguments from variables <br/>
+        -- Runs on the page but isolated from page scripts <br/>
+        -- Result is saved to the assigned variable
+      </CommandInfo>
       {collapse.control}
 
       <div className={'badge badge-pink mr-2'}>Isolated</div>

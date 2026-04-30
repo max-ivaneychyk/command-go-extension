@@ -24,6 +24,7 @@ const Control = ({name}) => {
   const {jsx: saveTo} = useSaveResultTo({name: `${name}saveTo`, text: ""})
   const {jsx: from} = useSelectFrom({
     group: `${name}from`,
+    placeholder: '{"key": "value"}'
   })
   return (
     <>  <Dropdown
